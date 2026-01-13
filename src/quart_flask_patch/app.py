@@ -6,28 +6,11 @@ from __future__ import annotations
 
 from functools import wraps
 from inspect import iscoroutine, iscoroutinefunction
-from typing import Any, Awaitable, Callable, Optional, Union
+from typing import Any, Awaitable, Callable
 
-from quart import Response
 from quart.app import Quart
-from quart.ctx import RequestContext
-from quart.globals import request_ctx
-from werkzeug.wrappers import Response as WerkzeugResponse
 
 from ._synchronise import sync_with_context
-
-old_full_dispatch_request = Quart.full_dispatch_request
-
-
-async def new_full_dispatch_request(
-    self: Quart, request_context: Optional[RequestContext] = None
-) -> Union[Response, WerkzeugResponse]:
-    request_ = (request_context or request_ctx).request
-    await request_.get_data()
-    return await old_full_dispatch_request(self, request_context)
-
-
-Quart.full_dispatch_request = new_full_dispatch_request  # type: ignore
 
 
 def new_ensure_async(  # type: ignore
