@@ -1,14 +1,11 @@
 [project]
 name = "quart-flask-patch"
-version = "0.3.0"
+version = "0.3.1"
 requires-python = ">=3.14"
 description = "Quart-Flask-Patch is a Quart extension that patches Quart to work with Flask extensions."
 license = "MIT"
 readme = "README.rst"
-dependencies = [
-    "quart>=0.23.1",
-    "werkzeug>=3.1.9",
-]
+dependencies = ["quart>=0.23.1", "werkzeug>=3.1.9"]
 
 [tool.black]
 line-length = 100
@@ -43,9 +40,7 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [dependency-groups]
-dev = [
-    "tox",
-]
+dev = ["tox"]
 
 [tool.pytest.ini_options]
 addopts = "--no-cov-on-fail --showlocals --strict-markers"
