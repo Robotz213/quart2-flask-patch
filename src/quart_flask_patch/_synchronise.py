@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any, Awaitable
+from collections.abc import Awaitable
+from typing import Any
 
 from quart.globals import _cv_app, _cv_request, _cv_websocket
 

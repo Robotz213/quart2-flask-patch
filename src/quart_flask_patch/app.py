@@ -4,9 +4,10 @@
 # created.
 from __future__ import annotations
 
+from collections.abc import Awaitable, Callable
 from functools import wraps
 from inspect import iscoroutine, iscoroutinefunction
-from typing import Any, Awaitable, Callable
+from typing import Any
 
 from quart.app import Quart
 

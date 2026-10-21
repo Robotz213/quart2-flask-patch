@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "quart-flask-patch"
 version = "0.3.0"
+requires-python = ">=3.13"
 description = "Quart-Flask-Patch is a Quart extension that patches Quart to work with Flask extensions."
 authors = ["pgjones <philip.graham.jones@googlemail.com>"]
 classifiers = [
@@ -22,6 +23,8 @@ classifiers = [
 license = "MIT"
 readme = "README.rst"
 repository = "https://github.com/pgjones/quart-flask-patch/"
+
+dependencies = ["werkzeug", "quart>=0.20.0"]
 
 [tool.black]
 line-length = 100
@@ -55,8 +58,6 @@ warn_return_any = false
 warn_unused_configs = true
 warn_unused_ignores = true
 
-[tool.poetry.dependencies]
-quart = ">=0.19"
 
 [tool.poetry.dev-dependencies]
 tox = "*"
