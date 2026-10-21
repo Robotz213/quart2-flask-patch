@@ -57,7 +57,7 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [tool.poetry.dependencies]
-quart = "quart>=0.20.0"
+quart = ">=0.20.0"
 
 [tool.poetry.dev-dependencies]
 tox = "*"
