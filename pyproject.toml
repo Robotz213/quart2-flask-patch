@@ -1,28 +1,10 @@
-[tool.poetry]
+[project]
 name = "quart-flask-patch"
 version = "0.3.0"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 description = "Quart-Flask-Patch is a Quart extension that patches Quart to work with Flask extensions."
-authors = ["pgjones <philip.graham.jones@googlemail.com>"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Environment :: Web Environment",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-]
 license = "MIT"
 readme = "README.rst"
-repository = "https://github.com/pgjones/quart-flask-patch/"
 
 [tool.black]
 line-length = 100
@@ -55,12 +37,10 @@ warn_redundant_casts = true
 warn_return_any = false
 warn_unused_configs = true
 warn_unused_ignores = true
+dependencies = ["quart==0.21.0"]
 
-[tool.poetry.dependencies]
-quart = ">=0.20.0"
-
-[tool.poetry.dev-dependencies]
-tox = "*"
+[dependency-groups]
+dev = ["tox"]
 
 [tool.pytest.ini_options]
 addopts = "--no-cov-on-fail --showlocals --strict-markers"
@@ -68,5 +48,12 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=82.0.1", "wheel"]
+build-crawjud = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "." }
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["quart_flask_patch*"]
