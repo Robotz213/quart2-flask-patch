@@ -1,3 +1,7 @@
+# pyright: basic
+# pyright: reportPrivateUsage=false
+# pyright: reportAttributeAccessIssue=false
+
 from typing import Any
 
 from flask.helpers import (
@@ -10,13 +14,13 @@ from flask.helpers import (
     redirect,
     stream_with_context,
 )
+from quart import helpers
 from quart.globals import current_app
-from quart.helpers import (
-    send_file as quart_send_file,
-    send_from_directory as quart_send_from_directory,
-)
 
 from ._synchronise import sync_with_context
+
+quart_send_file = helpers.send_file
+quart_send_from_directory = helpers.send_from_directory
 
 
 def url_for(*args: Any, **kwargs: Any) -> Any:

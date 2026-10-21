@@ -1,11 +1,16 @@
+# pyright: basic
+# pyright: reportPrivateUsage=false
+# pyright: reportAttributeAccessIssue=false
+# pyright: reportPrivateImportUsage=false
+
 from __future__ import annotations
 
 from quart.cli import (  # noqa: F401
     AppGroup,
-    click,
     QuartGroup,
-    run_command,
     ScriptInfo,
+    click,
+    run_command,
     shell_command,
     with_appcontext,
 )

@@ -1,27 +1,28 @@
+# pyright: basic
 from __future__ import annotations  # isort:skip
 
-import quart  # isort:skip # noqa: F401
+import quart  # isort:skip
 import quart_flask_patch.app  # isort:skip
-import quart_flask_patch.cli  # isort:skip # noqa: F401
-import quart_flask_patch.globals  # isort:skip # noqa: F401
-import quart_flask_patch.helpers  # isort:skip # noqa: F401
+import quart_flask_patch.cli  # isort:skip
+import quart_flask_patch.globals  # isort:skip
+import quart_flask_patch.helpers  # isort:skip
 import quart_flask_patch.testing  # isort:skip # noqa: F401
 import quart.views  # isort:skip # noqa: F401
 from quart_flask_patch._patch import patch_all  # isort:skip
 
 patch_all()
 
-from flask.app import Flask  # noqa: E402, I100
-from flask.blueprints import Blueprint  # noqa: E402
-from flask.config import Config  # noqa: E402
-from flask.ctx import (  # noqa: E402
+from flask.app import Flask
+from flask.blueprints import Blueprint
+from flask.config import Config
+from flask.ctx import (
     after_this_request,
     copy_current_request_context,
     has_app_context,
     has_request_context,
 )
-from flask.globals import current_app, g, request, session  # noqa: E402
-from flask.helpers import (  # noqa: E402
+from flask.globals import current_app, g, request, session
+from flask.helpers import (
     flash,
     get_flashed_messages,
     get_template_attribute,
@@ -31,8 +32,8 @@ from flask.helpers import (  # noqa: E402
     stream_with_context,
     url_for,
 )
-from flask.json import jsonify  # noqa: E402
-from flask.signals import (  # noqa: E402
+from flask.json import jsonify
+from flask.signals import (
     appcontext_popped,
     appcontext_pushed,
     appcontext_tearing_down,
@@ -44,27 +45,31 @@ from flask.signals import (  # noqa: E402
     request_tearing_down,
     template_rendered,
 )
-from flask.templating import render_template, render_template_string  # noqa: E402
-from flask.typing import ResponseReturnValue  # noqa: E402
-from flask.wrappers import Request, Response  # noqa: E402
-from markupsafe import escape, Markup  # noqa: E402
-from werkzeug.exceptions import abort  # noqa: E402
-from werkzeug.utils import redirect  # noqa: E402
+from flask.templating import render_template, render_template_string
+from flask.typing import ResponseReturnValue
+from flask.wrappers import Request, Response
+from markupsafe import Markup, escape
+from werkzeug.exceptions import abort
+from werkzeug.utils import redirect
 
 __all__ = (
+    "Blueprint",
+    "Config",
+    "Flask",
+    "Markup",
+    "Request",
+    "Response",
+    "ResponseReturnValue",
     "abort",
     "after_this_request",
     "appcontext_popped",
     "appcontext_pushed",
     "appcontext_tearing_down",
     "before_render_template",
-    "Blueprint",
-    "Config",
     "copy_current_request_context",
     "current_app",
     "escape",
     "flash",
-    "Flask",
     "g",
     "get_flashed_messages",
     "get_template_attribute",
@@ -73,18 +78,14 @@ __all__ = (
     "has_request_context",
     "jsonify",
     "make_response",
-    "Markup",
     "message_flashed",
     "redirect",
     "render_template",
     "render_template_string",
     "request",
-    "Request",
     "request_finished",
     "request_started",
     "request_tearing_down",
-    "Response",
-    "ResponseReturnValue",
     "send_file",
     "send_from_directory",
     "session",
@@ -94,7 +95,7 @@ __all__ = (
 )
 
 
-import sys  # isort:skip # noqa: E402, I100
+import sys  # isort:skip
 
 json = sys.modules["flask.json"]
 sys.modules["flask"] = sys.modules[__name__]

@@ -1,3 +1,9 @@
+Unreleased
+----------
+
+* Support Quart 0.23.1 and its unified application/request/websocket context.
+* Run the test matrix on Python 3.14, the project's minimum supported version.
+
 0.3.0 2023-11-19
 ----------------
 

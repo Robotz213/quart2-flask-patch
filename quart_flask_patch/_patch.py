@@ -1,9 +1,13 @@
+# pyright: basic
+# pyright: reportAttributeAccessIssue=false
+
 from __future__ import annotations
 
 import inspect
 import sys
 import types
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 from ._synchronise import sync_with_context
 
@@ -22,7 +26,7 @@ def _convert_module(new_name, module):  # type: ignore
             setattr(new_module, name, _context_decorator(member))
         else:
             setattr(new_module, name, member)
-    setattr(new_module, "_QUART_PATCHED", True)
+    new_module._QUART_PATCHED = True
     return new_module
 
 
@@ -35,7 +39,7 @@ def _patch_modules() -> None:
         if name.startswith("quart_flask_patch._"):
             continue
         elif name.startswith("quart_flask_patch"):
-            setattr(module, "_QUART_PATCHED", True)
+            module._QUART_PATCHED = True
             flask_modules[name.replace("quart_flask_patch", "flask")] = module
 
     sys.modules.update(flask_modules)

@@ -2,6 +2,8 @@
 # allow for Werkzeug HTTPExceptions to be considered in a special way
 # (like the quart HTTPException). In addition a Flask reference is
 # created.
+# pyright: basic
+
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable

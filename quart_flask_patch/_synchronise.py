@@ -1,20 +1,31 @@
+# pyright: basic
+# pyright: reportPrivateUsage=false
+# pyright: reportAttributeAccessIssue=false
+
 from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable
-from typing import Any
+from typing import TYPE_CHECKING
 
-from quart.globals import _cv_app, _cv_request, _cv_websocket
+import quart.globals as quart_globals
+
+if TYPE_CHECKING:
+    from _typeshed import Incomplete as Any
 
 
-def sync_with_context(future: Awaitable) -> Any:
-    context: Any = None
-    if _cv_request.get(None) is not None:
-        context = _cv_request.get().copy()
-    elif _cv_websocket.get(None) is not None:
-        context = _cv_websocket.get().copy()
-    elif _cv_app.get(None) is not None:
-        context = _cv_app.get().copy()
+def _copy_context() -> Any:
+    for context_name in ("_cv_request", "_cv_websocket", "_cv_app"):
+        context_var = getattr(quart_globals, context_name, None)
+        if context_var is not None:
+            context = context_var.get(None)
+            if context is not None:
+                return context.copy()
+    return None
+
+
+def sync_with_context(future: Awaitable[Any]) -> Any:
+    context = _copy_context()
 
     async def context_wrapper() -> Any:
         if context is not None:
@@ -23,4 +34,4 @@ def sync_with_context(future: Awaitable) -> Any:
         else:
             return await future
 
-    return asyncio.get_event_loop().sync_wait(context_wrapper())  # type: ignore
+    return asyncio.get_event_loop().sync_wait(context_wrapper())
