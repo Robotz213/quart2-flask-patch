@@ -5,7 +5,7 @@ requires-python = ">=3.14"
 description = "Quart-Flask-Patch is a Quart extension that patches Quart to work with Flask extensions."
 license = "MIT"
 readme = "README.rst"
-dependencies = ["quart>=0.23.1", "werkzeug>=3.1.9"]
+dependencies = ["greenback>=1.3.0", "quart>=0.23.1", "werkzeug>=3.1.9"]
 
 [tool.black]
 line-length = 100

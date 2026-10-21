@@ -4,10 +4,10 @@
 
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Awaitable
 from typing import TYPE_CHECKING
 
+import greenback
 import quart.globals as quart_globals
 
 if TYPE_CHECKING:
@@ -34,4 +34,4 @@ def sync_with_context(future: Awaitable[Any]) -> Any:
         else:
             return await future
 
-    return asyncio.get_event_loop().sync_wait(context_wrapper())
+    return greenback.await_(context_wrapper())

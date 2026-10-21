@@ -11,6 +11,7 @@ from functools import wraps
 from inspect import iscoroutine, iscoroutinefunction
 from typing import Any
 
+import greenback
 from quart.app import Quart
 
 from ._synchronise import sync_with_context
@@ -20,11 +21,18 @@ def new_ensure_async(  # type: ignore
     self, func: Callable[..., Any]
 ) -> Callable[..., Awaitable[Any]]:
     if iscoroutinefunction(func):
-        return func
+
+        @wraps(func)
+        async def _wrapper(*args: Any, **kwargs: Any) -> Any:
+            await greenback.ensure_portal()
+            return await func(*args, **kwargs)
+
+        return _wrapper
     else:
 
         @wraps(func)
         async def _wrapper(*args: Any, **kwargs: Any) -> Any:
+            await greenback.ensure_portal()
             result = func(*args, **kwargs)
             if iscoroutine(result):
                 return await result
